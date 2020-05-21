@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <title>Immedia Frontend Developer Assessment</title>
+    <meta content="" name="descriptison" />
+    <meta content="" name="keywords" />
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+      rel="stylesheet"
+    />
+
+    <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/icofont/icofont.min.css" rel="stylesheet" />
+    <link href="assets/boxicons/css/boxicons.min.css" rel="stylesheet" />
+    <link
+      href="assets/owl.carousel/assets/owl.carousel.min.css"
+      rel="stylesheet"
+    />
+    <link href="assets/aos/aos.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script type="text/javascript">
+      var map;
+      var service;
+
+      function showSearchResults(results, status) {
+        console.log(results);
+
+        for (var i = 0; i < results.length; i++) {
+          var marker = new google.maps.Marker({
+            position: results[i].geometry.location,
+            map: map,
+          });
+        }
+      }
+
+      function doSearch() {
+        var request = {
+          bounds: map.getBounds(),
+          type: ["restaurants"],
+        };
+        service.nearbySearch(request, showSearchResults);
+      }
+
+      function initiliase(location) {
+        console.log(location);
+
+        var myPosition = new google.maps.LatLng(
+          location.coords.latitude,
+          location.coords.longitude
+        );
+        var mapOptions = {
+          center: myPosition,
+          zoom: 15,
+          mapTypeID: google.maps.MapTypeId.ROADMAP,
+        };
+
+        map = new google.maps.Map(
+          document.getElementById("map_canvas"),
+          mapOptions
+        );
+
+        var marker = new google.maps.Marker({
+          position: myPosition,
+          title: "You are here!",
+          map: map,
+        });
+
+        service = new google.maps.places.PlacesService(map);
+
+        // This will prevent the search from running until the map bounds are initialised
+        google.maps.event.addListenerOnce(map, "bounds_changed", doSearch);
+
+        // Redo the search when the refresh button is clicked
+        $("refresh").click(doSearch);
+
+        $("radius").click(function () {
+          // Draw a circle on map
+          var circleOptions = {
+            strokeColor: "#0000FF",
+            strokeOpacity: 0.8,
+            strokeWeight: 1.5,
+            fillColor: "#0000FF",
+            fillOpacity: 0.35,
+            map: map,
+            center: myPosition,
+            radius: 2000,
+          };
+          var circle = new google.maps.Circle(circleOptions);
+        });
+      }
+
+      $(document).ready(function () {
+        navigator.geolocation.getCurrentPosition(initiliase);
+      });
+    </script>
+    <style type="text/css">
+      #map_canvas {
+        height: 700px;
+      }
+    </style>
+  </head>
+
+  <body onload="myFunction()">
+    <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top">
+      <div class="container d-flex">
+        <div class="logo mr-auto">
+          <h1 class="text-light"><a href="index.html">Immedia</a></h1>
+          <!-- Uncomment below if you prefer to use an image logo -->
+          <!-- <a href="index.html"><img src="img/logo.png" alt="" class="img-fluid"></a>-->
+        </div>
+
+        <nav class="nav-menu d-none d-lg-block">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="page1.html">Location</a></li>
+            <li class="active"><a href="page2.html">Location on Map</a></li>
+            <li><a href="page3.html">Places on Map</a></li>
+            <li><a href="page4.html">Photos on Map</a></li>
+          </ul>
+        </nav>
+        <!-- .nav-menu -->
+      </div>
+    </header>
+    <!-- End Header -->
+
+    <main id="main">
+      <!-- ======= Details Section ======= -->
+      <section id="details" class="details">
+        <div class="container">
+          <div class="row content">
+            <div class="col-md-12 pt-4" data-aos="fade-up">
+              <h3>
+                Location on Map
+              </h3>
+              <div id="loader"></div>
+              <div style="display: none;" id="myDiv" class="animate-bottom">
+                <div id="map_canvas"></div>
+              </div>
+            </div>
+          </div>
+      </section><!-- End Details Section -->
+    </main>
+    <!-- End #main -->
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer">
+      <div class="container py-4">
+        <div class="copyright">
+          &copy; Copyright <strong><span>BjornBottin</span></strong
+          >. All Rights Reserved
+        </div>
+        <div class="credits">
+          Created by
+          <a href="http://www.bjornbottin.co.za">www.bjornbottin.co.za</a>
+        </div>
+      </div>
+    </footer>
+    <!-- End Footer -->
+
+    <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+
+    <!-- JS Files -->
+    <script src="assets/jquery/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/jquery.easing/jquery.easing.min.js"></script>
+    <script src="assets/owl.carousel/owl.carousel.min.js"></script>
+    <script src="assets/aos/aos.js"></script>
+
+    <!-- Main JS File -->
+    <script src="js/main.js"></script>
+    <!-- Location script -->
+    <script>
+      var myVar;
+
+      function myFunction() {
+        myVar = setTimeout(showPage, 3000);
+      }
+
+      function showPage() {
+        document.getElementById("loader").style.display = "none";
+        document.getElementById("myDiv").style.display = "block";
+      }
+    </script>
+    <script
+      type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADzVx4eNWrgNbUw5fjnoLg0Kt_1x9yzeE&libraries=places&callback=initMap" async
+      defer
+    ></script>
+  </body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <title>Immedia Frontend Developer Assessment</title>
+    <meta content="" name="descriptison" />
+    <meta content="" name="keywords" />
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+      rel="stylesheet"
+    />
+
+    <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/icofont/icofont.min.css" rel="stylesheet" />
+    <link href="assets/boxicons/css/boxicons.min.css" rel="stylesheet" />
+    <link
+      href="assets/owl.carousel/assets/owl.carousel.min.css"
+      rel="stylesheet"
+    />
+    <link href="assets/aos/aos.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        navigator.geolocation.getCurrentPosition(success, error);
+      });
+
+      function success(position) {
+        var lat = position.coords.latitude;
+        var long = position.coords.longitude;
+
+        document.getElementById("lat").innerHTML = lat;
+        document.getElementById("long").innerHTML = long;
+      }
+
+      function error(e) {
+        alert(e.message);
+      }
+    </script>
+  </head>
+
+  <body onload="myFunction()">
+    <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top">
+      <div class="container d-flex">
+        <div class="logo mr-auto">
+          <h1 class="text-light"><a href="index.html">Immedia</a></h1>
+          <!-- Uncomment below if you prefer to use an image logo -->
+          <!-- <a href="index.html"><img src="img/logo.png" alt="" class="img-fluid"></a>-->
+        </div>
+
+        <nav class="nav-menu d-none d-lg-block">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li class="active"><a href="page1.html">Location</a></li>
+            <li><a href="page2.html">Location on Map</a></li>
+            <li><a href="page3.html">Restaurants on Map</a></li>
+            <li><a href="page4.html">Photos on Map</a></li>
+          </ul>
+        </nav>
+        <!-- .nav-menu -->
+      </div>
+    </header>
+    <!-- End Header -->
+
+    <main id="main">
+      <!-- ======= Details Section ======= -->
+      <section id="details" class="details">
+        <div class="container">
+          <div class="row content">
+            <div class="col-md-4 pt-5 pt-lg-0 order-2 order-lg-1" data-aos="fade-right">
+              <img src="img/details-1.png" class="img-fluid" alt="" />
+            </div>
+            <div class="col-md-8 pt-4" data-aos="fade-up">
+              <h3 style="margin-bottom: 30px">
+                My Location
+              </h3>
+              <div id="loader"></div>
+              <div style="display: none;" id="myDiv" class="animate-bottom">
+                <h2>Latitude: <ouput id="lat"></ouput></h2>
+                <br>
+                <h2>Longitude: <output id="long"></output></h2>
+              </div>
+            </div>
+          </div>
+      </section><!-- End Details Section -->
+    </main>
+    <!-- End #main -->
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer">
+      <div class="container py-4">
+        <div class="copyright">
+          &copy; Copyright <strong><span>BjornBottin</span></strong
+          >. All Rights Reserved
+        </div>
+        <div class="credits">
+          Created by
+          <a href="http://www.bjornbottin.co.za">www.bjornbottin.co.za</a>
+        </div>
+      </div>
+    </footer>
+    <!-- End Footer -->
+
+    <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+
+    <!-- JS Files -->
+    <script src="assets/jquery/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/jquery.easing/jquery.easing.min.js"></script>
+    <script src="assets/owl.carousel/owl.carousel.min.js"></script>
+    <script src="assets/aos/aos.js"></script>
+
+    <!-- Main JS File -->
+    <script src="js/main.js"></script>
+    <!-- Location script -->
+    <script>
+      var myVar;
+
+      function myFunction() {
+        myVar = setTimeout(showPage, 3000);
+      }
+
+      function showPage() {
+        document.getElementById("loader").style.display = "none";
+        document.getElementById("myDiv").style.display = "block";
+      }
+    </script>
+  </body>
+</html>
