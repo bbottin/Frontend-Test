@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <title>Immedia Frontend Developer Assessment</title>
+    <meta content="" name="descriptison" />
+    <meta content="" name="keywords" />
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+      rel="stylesheet"
+    />
+
+    <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/icofont/icofont.min.css" rel="stylesheet" />
+    <link href="assets/boxicons/css/boxicons.min.css" rel="stylesheet" />
+    <link
+      href="assets/owl.carousel/assets/owl.carousel.min.css"
+      rel="stylesheet"
+    />
+    <link href="assets/aos/aos.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"
+    />
+    <style type="text/css">
+      #sq,#lg-sq,#thumb,#small,#mid,#ori {
+      width: 100%
+      }
+      <link rel="stylesheet" type="text/css" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    </style>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script>
+      var apiurl, myresult, apiurl_size, selected_size;
+      apiurl =
+        "https://api.flickr.com/services/rest/?method=flickr.photos.getRecent&api_key=88374d7bd3fe5eefe2b8c15e419a8e4d&per_page=10&format=json&nojsoncallback=1";
+      $(document).ready(function () {
+        $("#sq").click(function () {
+          selected_size = 75;
+        });
+      });
+      $(document).ready(function () {
+        $("#lg-sq").click(function () {
+          selected_size = 150;
+        });
+      });
+      $(document).ready(function () {
+        $("#thumb").click(function () {
+          selected_size = 100;
+        });
+      });
+      $(document).ready(function () {
+        $("#small").click(function () {
+          selected_size = 240;
+        });
+      });
+      $(document).ready(function () {
+        $("#mid").click(function () {
+          selected_size = 500;
+        });
+      });
+      $(document).ready(function () {
+        $("#ori").click(function () {
+          selected_size = 640;
+        });
+      });
+      $(document).ready(function () {
+        $("#button").click(function () {
+          $.getJSON(apiurl, function (json) {
+            $.each(json.photos.photo, function (i, myresult) {
+              apiurl_size =
+                "https://api.flickr.com/services/rest/?method=flickr.photos.getSizes&api_key=88374d7bd3fe5eefe2b8c15e419a8e4d&photo_id=" +
+                myresult.id +
+                "&format=json&nojsoncallback=1";
+              $.getJSON(apiurl_size, function (size) {
+                $.each(size.sizes.size, function (i, myresult_size) {
+                  if (myresult_size.width == selected_size) {
+                    $("#results").append(
+                      '<p><a href="' +
+                        myresult_size.url +
+                        '" target="_blank"><img src="' +
+                        myresult_size.source +
+                        '"/></a></p>'
+                    );
+                  }
+                });
+              });
+            });
+          });
+        });
+      });
+    </script>
+  </head>
+
+  <body>
+    <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top">
+      <div class="container d-flex">
+        <div class="logo mr-auto">
+          <h1 class="text-light"><a href="index.html">Immedia</a></h1>
+          <!-- Uncomment below if you prefer to use an image logo -->
+          <!-- <a href="index.html"><img src="img/logo.png" alt="" class="img-fluid"></a>-->
+        </div>
+
+        <nav class="nav-menu d-none d-lg-block">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="page1.html">Location</a></li>
+            <li><a href="page2.html">Location on Map</a></li>
+            <li><a href="page3.html">Places on Map</a></li>
+            /* <li><a href="page4.html">Photos on Map</a></li> */
+            <li class="active"><a href="page5.html">Flickr Photos</a></li>
+          </ul>
+        </nav>
+        <!-- .nav-menu -->
+      </div>
+    </header>
+    <!-- End Header -->
+
+    <main id="main">
+      <!-- ======= Details Section ======= -->
+      <section id="details" class="details">
+        <div class="container">
+          <div class="row content">
+            <div class="col-md-12 pt-4" data-aos="fade-up">
+              <h3>
+                Flickr photo library
+              </h3>
+              <div class="row">
+                <div class="col-md-12">
+                  <h2>
+                    Select size of photos (in pixels) you want them to be displayed
+                  </h2>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-2">
+                  <button type="button" class="btn btn-primary" id="sq">
+                    Square [75X75]
+                  </button>
+                </div>
+                <div class="col-md-2">
+                  <button type="button" class="btn btn-primary" id="lg-sq">
+                    Large Square [150X150]
+                  </button>
+                </div>
+                <div class="col-md-2">
+                  <button type="button" class="btn btn-primary" id="thumb">
+                    Thumbnail
+                  </button>
+                </div>
+                <div class="col-md-2">
+                  <button type="button" class="btn btn-primary" id="small">
+                    Small
+                  </button>
+                </div>
+                <div class="col-md-2">
+                  <button type="button" class="btn btn-primary" id="mid">Medium</button>
+                </div>
+                <div class="col-md-2">
+                  <button type="button" class="btn btn-primary" id="ori">
+                    Original
+                  </button>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <h2>Hit This button to fetch photos</h2>
+                  <button type="button" class="btn btn-success" id="button">
+                    Fetch Recent Photos
+                  </button>
+                  <hr />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div id="results"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </section><!-- End Details Section -->
+    </main>
+    <!-- End #main -->
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer">
+      <div class="container py-4">
+        <div class="copyright">
+          &copy; Copyright <strong><span>BjornBottin</span></strong
+          >. All Rights Reserved
+        </div>
+        <div class="credits">
+          Created by
+          <a href="http://www.bjornbottin.co.za">www.bjornbottin.co.za</a>
+        </div>
+      </div>
+    </footer>
+    <!-- End Footer -->
+
+    <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+
+    <!-- JS Files -->
+    <script src="assets/jquery/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/jquery.easing/jquery.easing.min.js"></script>
+    <script src="assets/owl.carousel/owl.carousel.min.js"></script>
+    <script src="assets/aos/aos.js"></script>
+
+    <!-- Main JS File -->
+    <script src="js/main.js"></script>
+    
+  </body>
+</html>
